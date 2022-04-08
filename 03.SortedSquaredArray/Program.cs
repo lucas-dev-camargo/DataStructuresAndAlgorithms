@@ -10,6 +10,10 @@ namespace _03.SortedSquaredArray
             var array = new[] { 1, 2, 3 };
             var retorno = SortedSquaredArray(array);
             foreach (var item in retorno) Console.WriteLine(item);
+
+            var retorno2 = SortedSquaredArray2(array);
+            foreach (var item in retorno2) Console.WriteLine(item);
+
         }
 
         // O(nlogn) time | O(n) space
@@ -25,6 +29,38 @@ namespace _03.SortedSquaredArray
             Array.Sort(sortedSquares);
             return sortedSquares;
         }
+
+        // O (n) time | O (n) space
+        public static int[] SortedSquaredArray2(int[] array)
+        {
+            int[] sortedSquares = new int[array.Length];
+            int smallerValueIdx = 0;
+            int largerValueIdx = array.Length - 1;
+
+            for(int idx = array.Length - 1; idx >= 0; idx--)
+            {
+                int smallerValue = array[smallerValueIdx];
+                int largerValue = array[largerValueIdx];
+
+                if (Math.Abs(smallerValue) > Math.Abs(largerValue))
+                {
+                    sortedSquares[idx] = smallerValue * smallerValue;
+                    smallerValueIdx++;
+                }
+
+                else
+                {
+                    sortedSquares[idx] = largerValue * largerValue;
+                    largerValueIdx--;
+                }
+            }
+
+            return sortedSquares;
+        }
+
+
+
+       
 
     }
 }
